@@ -1,0 +1,26 @@
+{
+  "name": "ms_react",
+  "version": "1.0.0",
+  "description": "Learning React",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShellySea/MSReact.git"
+  },
+  "keywords": [
+    "react",
+    "myprac"
+  ],
+  "author": "Saily Jadhav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShellySea/MSReact/issues"
+  },
+  "homepage": "https://github.com/ShellySea/MSReact#readme",
+  "dependencies": {
+    "parcel": "^2.9.3"
+  }
+}
