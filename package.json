@@ -27,5 +27,10 @@
   },
   "devDependencies": {
     "process": "^0.11.10"
-  }
+  },
+  "browsersList": [
+    "last 2 version",
+    "Last 10 Chrome version",
+    "Last 2 Firefox version"
+  ]
 }
