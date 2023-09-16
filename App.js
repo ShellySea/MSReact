@@ -1,13 +1,5 @@
-/**
- * <div id="container">
- *      <div id="child">
- *          <h1>Heading 1</h1>
- *          <h2>Heading 2 </h2>
- *      </div>
- * </div>
- *
- *
- */
+import React from "react";
+import ReactDOM from "react-dom/client";
 
 const heading1 = React.createElement(
   "h1",
@@ -19,7 +11,7 @@ const heading1 = React.createElement(
     },
     key: "b",
   },
-  "Hello Saily!"
+  "Hey Saily!"
 );
 
 const heading2 = React.createElement(
@@ -32,7 +24,7 @@ const heading2 = React.createElement(
     key: "a",
     xyz: "ppp",
   },
-  "Hey!!"
+  "How you doin!!"
 );
 
 const container = React.createElement("div", { id: "container" }, [
