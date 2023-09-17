@@ -27,10 +27,15 @@ const heading2 = React.createElement(
   "How you doin!!"
 );
 
-const container = React.createElement("div", { id: "container" }, [
-  heading1,
-  heading2,
-]);
+// using traditional createElement method by React
+
+// const container = React.createElement("div", { id: "container" }, [
+//   heading1,
+//   heading2,
+// ]);
+
+// using JSX
+const container = <div id="container">{[heading1, heading2]}</div>;
 
 // For complex structure using JSX:
 
