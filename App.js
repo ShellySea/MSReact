@@ -23,6 +23,7 @@ const Heading2 = () => {
 const container = (
   <div id="container">
     {heading1}
+    {Heading2()}
     <Heading2 />
   </div>
 );
