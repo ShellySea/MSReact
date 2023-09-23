@@ -26,7 +26,7 @@ const styleCard = {
   backgroundColor: "pink",
 };
 
-const RestaurantCard = (props) => {
+const RestaurantCard = ({ resname, cusines }) => {
   return (
     <div className="res-card" style={styleCard}>
       <img
@@ -34,8 +34,8 @@ const RestaurantCard = (props) => {
         alt="res-logo"
         src="https://www.tastingtable.com/img/gallery/17-celebrity-chefs-and-their-favorite-fast-food-restaurants/l-intro-1674674335.jpg"
       />
-      <h3 style={{ color: "green" }}>{props.resname}</h3>
-      <h4>{props.cusines} North Indian, Biryani, Asian</h4>
+      <h3 style={{ color: "green" }}>{resname}</h3>
+      <h4>{cusines}</h4>
       <h4>4.5 stars</h4>
       <h4>38 mins</h4>
     </div>
@@ -46,8 +46,8 @@ const RestaurantCard = (props) => {
 const Body = () => {
   return (
     <div className="res-container">
-      <RestaurantCard resname="Meghana Food" cusines="NN" />
-      <RestaurantCard resname="KFC" />
+      <RestaurantCard resname="Meghana Food" cusines="Asian, North Indian" />
+      <RestaurantCard resname="KFC" cusines="Burger, Fast food" />
       <RestaurantCard resname="McDonald" />
       <RestaurantCard resname="Sai Biryani" />
       <RestaurantCard resname="Chaitanya" />
