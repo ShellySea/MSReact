@@ -26,7 +26,8 @@ const styleCard = {
   backgroundColor: "pink",
 };
 
-const RestaurantCard = ({ resname, cusines }) => {
+const RestaurantCard = (props) => {
+  const { resname, cusines, rating } = props;
   return (
     <div className="res-card" style={styleCard}>
       <img
@@ -36,7 +37,7 @@ const RestaurantCard = ({ resname, cusines }) => {
       />
       <h3 style={{ color: "green" }}>{resname}</h3>
       <h4>{cusines}</h4>
-      <h4>4.5 stars</h4>
+      <h4>{rating} stars</h4>
       <h4>38 mins</h4>
     </div>
   );
@@ -46,7 +47,11 @@ const RestaurantCard = ({ resname, cusines }) => {
 const Body = () => {
   return (
     <div className="res-container">
-      <RestaurantCard resname="Meghana Food" cusines="Asian, North Indian" />
+      <RestaurantCard
+        resname="Meghana Food"
+        cusines="Asian, North Indian"
+        rating="4.5"
+      />
       <RestaurantCard resname="KFC" cusines="Burger, Fast food" />
       <RestaurantCard resname="McDonald" />
       <RestaurantCard resname="Sai Biryani" />
