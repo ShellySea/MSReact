@@ -1,7 +1,7 @@
 .header {
   display: flex;
   justify-content: space-between;
-  border: 1px solid black;
+  border: 1px solid #000;
 }
 
 .logo {
@@ -36,7 +36,7 @@
   margin: 5px;
   padding: 5px;
   width: 222px;
-  border: 1px solid black;
+  border: 1px solid #000;
 }
 
 .res-card:hover {
