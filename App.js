@@ -1374,11 +1374,11 @@ const myData = [
 ];
 
 const RestaurantCard = (props) => {
-  const { myData } = props;
-  console.log(myData?.info);
+  const { resData } = props;
+  console.log(resData?.info);
   const { cloudinaryImageId, name, cuisines, costForTwo, avgRating } =
-    myData?.info;
-  const { deliveryTime } = myData?.info.sla;
+    resData?.info;
+  const { deliveryTime } = resData?.info.sla;
   return (
     <div className="res-card" style={styleCard}>
       <img
@@ -1403,7 +1403,7 @@ const Body = () => {
   return (
     <div className="res-container">
       {myData.map((restaurant) => (
-        <RestaurantCard myData={restaurant} />
+        <RestaurantCard resData={restaurant} />
       ))}
     </div>
   );
