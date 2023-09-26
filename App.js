@@ -1375,7 +1375,7 @@ const myData = [
 
 const RestaurantCard = (props) => {
   const { resData } = props;
-  console.log(resData?.info);
+  // console.log(resData?.info);
   const { cloudinaryImageId, name, cuisines, costForTwo, avgRating } =
     resData?.info;
   const { deliveryTime } = resData?.info.sla;
@@ -1403,13 +1403,11 @@ const Body = () => {
   return (
     <div className="res-container">
       {myData.map((restaurant) => (
-        <RestaurantCard resData={restaurant} />
+        <RestaurantCard resData={restaurant} key={restaurant.info.id} />
       ))}
     </div>
   );
 };
-
-// <RestaurantCard resData={restaurant} />
 
 // React Element
 const Body1 = <div>This is Body of React Element</div>;
