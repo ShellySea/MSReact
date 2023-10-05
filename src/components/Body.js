@@ -1,5 +1,5 @@
 import RestaurantCard from "./RestaurantCard";
-// import myData from "../utils/mockData";
+import Shimmer from "./Shimmer";
 import { useEffect, useState } from "react";
 
 // Functional component
@@ -34,10 +34,9 @@ const Body = () => {
     );
   };
 
-  const l = "loading...";
-
+  // Conditional Rendering
   if (listOfRestaurants.length === 0) {
-    return <Loader />;
+    return <Shimmer />;
   }
 
   return (
