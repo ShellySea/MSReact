@@ -1,16 +1,25 @@
+import { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 
-const login = (el) => {
-  if (el.target.innerHTML === "Login") {
-    console.log("login");
-    el.target.innerHTML = "Logout";
-  } else {
-    console.log("logout");
-    el.target.innerHTML = "Login";
-  }
-};
+// let btnName = "Login";
+
+// const [btnName, setBtnName] = useState("Login");
+
+// const login = () => {
+//   if (btnName === "Login") {
+//     setBtnName("Logout");
+//   } else {
+//     setBtnName("Login");
+//   }
+// };
 
 const Header = () => {
+  const [btnName, setBtnName] = useState("Login");
+
+  const login = () => {
+    btnName === "Login" ? setBtnName("Logout") : setBtnName("Login");
+  };
+
   return (
     <div className="header">
       <div className="logo-container">
@@ -24,7 +33,7 @@ const Header = () => {
           <li>Cart</li>
         </ul>
         <button className="login" onClick={login}>
-          Login
+          {btnName}
         </button>
       </div>
     </div>
