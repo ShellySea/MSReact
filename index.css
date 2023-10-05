@@ -217,3 +217,9 @@
 }
 
 /*****Shimmer ends*****/
+
+.login {
+  padding: 20px;
+  margin: 15px;
+  cursor: pointer;
+}
