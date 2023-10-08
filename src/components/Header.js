@@ -1,18 +1,6 @@
 import { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 
-// let btnName = "Login";
-
-// const [btnName, setBtnName] = useState("Login");
-
-// const login = () => {
-//   if (btnName === "Login") {
-//     setBtnName("Logout");
-//   } else {
-//     setBtnName("Login");
-//   }
-// };
-
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
 
