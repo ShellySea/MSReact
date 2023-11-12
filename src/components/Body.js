@@ -7,13 +7,17 @@ const Body = () => {
   const [listOfRestaurants, setListOfRestaurant] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchRestaurant, setSearchRestaurant] = useState("");
+  const [sR, setSr] = useState("false");
 
   // Whenever state variable update, react triggers a reconciliation cycle(re-renders the component)
   console.log("Body Rendered");
 
+  let showNoRes = false;
+  const noRestaurants = "No Restaurants Found!";
+
   useEffect(() => {
     fetchData();
-    // console.log("use effect called...");
+    console.log("use effect called...");
   }, []);
 
   const fetchData = async () => {
@@ -23,12 +27,18 @@ const Body = () => {
     const json = await data.json();
     console.log(json.data?.cards);
     setListOfRestaurant(
-      json.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants ||
+        json.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
     );
     console.log("---list of rest---");
     console.log(listOfRestaurants);
     setFilteredRestaurants(
-      json.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants ||
+        json.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
     );
   };
 
@@ -58,18 +68,19 @@ const Body = () => {
             <button
               style={{ marginLeft: "10px" }}
               onClick={() => {
-                console.log(searchRestaurant);
-                console.log(listOfRestaurants);
                 const result = listOfRestaurants.filter((res) =>
                   res.info.name
                     .toLowerCase()
                     .includes(searchRestaurant.toLowerCase())
                 );
-                console.log("res", result);
                 setFilteredRestaurants(result);
                 if (searchRestaurant === "") {
-                  console.log(listOfRestaurants);
-                  // setListOfRestaurant(listOfRestaurants);
+                  setSr("false");
+                  setFilteredRestaurants(listOfRestaurants);
+                }
+                if (result.length === 0) {
+                  showNoRes = true;
+                  setSr("true");
                 }
               }}
             >
@@ -83,7 +94,7 @@ const Body = () => {
             const filteredList = listOfRestaurants?.filter(
               (res) => res.info.avgRating > 4.3
             );
-            setListOfRestaurant(filteredList);
+            setFilteredRestaurants(filteredList);
           }}
         >
           Top Rated Restaurants
@@ -91,16 +102,20 @@ const Body = () => {
         <button
           // disabled={listOfRestaurants.length === myData.length}
           onClick={() => {
-            setListOfRestaurant(myData);
+            setFilteredRestaurants(listOfRestaurants);
           }}
         >
           Remove the filter
         </button>
       </div>
       <div className="res-container">
-        {filteredRestaurants?.map((restaurant) => (
-          <RestaurantCard resData={restaurant} key={restaurant.info.id} />
-        ))}
+        {sR === "true" ? (
+          <h3>No Restaurants Found!!</h3>
+        ) : (
+          filteredRestaurants?.map((restaurant) => (
+            <RestaurantCard resData={restaurant} key={restaurant.info.id} />
+          ))
+        )}
       </div>
     </div>
   );
