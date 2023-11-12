@@ -4,10 +4,11 @@ import Header from "./components/Header.js";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
 import Cart from "./components/Cart.js";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import About from "./components/About.js";
 import ContactUs from "./components/ContactUs.js";
 import Error from "./components/Error.js";
+import RestaurantMenu from "./components/RestaurantMenu.js";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 
 const AppLayout = () => {
   return (
@@ -39,6 +40,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/restaurant/:resId",
+        element: <RestaurantMenu />,
       },
     ],
     errorElement: <Error />,
