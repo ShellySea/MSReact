@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const User = (props) => {
   const [count, setCount] = useState(0);
   const [count2, setCount2] = useState(1);
 
   const { name, location, contact, type } = props;
+
+  useEffect(() => {
+    // place for doing API calls in function comp
+  }, []);
 
   return (
     <div className="user-card">

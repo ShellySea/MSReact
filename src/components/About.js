@@ -1,25 +1,40 @@
-import User from "./User";
+import React from "react";
+import { Component } from "react"; // destructure instead of import React
+
 import UserClass from "./UserClass";
 
-const About = () => {
-  return (
-    <div>
-      <h3>This is About Component!</h3>
-      <User
-        type={"Function"}
-        name={"Saily Jadhav"}
-        location={"Jersey"}
-        contact={"shellyseasail"}
-      />
-      <br />
-      <UserClass
-        type={"Class"}
-        name={"Saily Jadhav"}
-        location={"Jersey"}
-        contact={"shellyseasail"}
-      />
-    </div>
-  );
-};
+// class About extends Component{} // can do this way and destructure while importing
+class About extends Component {
+  constructor(props) {
+    super(props);
+    console.log("parent constructor");
+  }
+
+  componentDidMount() {
+    // place for doing API calls in class comp
+    console.log("Parent component did mount");
+  }
+
+  render() {
+    console.log("parent render");
+    return (
+      <div>
+        <h3>This is About Component!</h3>
+        <UserClass
+          type={"Class"}
+          name={"First"}
+          location={"Jersey"}
+          contact={"shellyseasail"}
+        />
+        <UserClass
+          type={"Class2"}
+          name={"Second"}
+          location={"Jersey 2"}
+          contact={"shellyseasail2"}
+        />
+      </div>
+    );
+  }
+}
 
 export default About;

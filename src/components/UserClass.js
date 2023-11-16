@@ -3,14 +3,22 @@ import React from "react";
 class UserClass extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    // console.log(props);
     this.state = {
       count: 0,
       count2: 1,
     };
+    console.log(this.props.name + "child constructor");
+  }
+
+  componentDidMount() {
+    // place for doing API calls in class comp
+    console.log(this.props.name + "Child component did mount");
   }
 
   render() {
+    console.log(this.props.name + " child render");
+
     const { name, location, contact, type } = this.props;
     const { count, count2 } = this.state;
 
@@ -39,3 +47,23 @@ class UserClass extends React.Component {
 }
 
 export default UserClass;
+
+/* 
+parent constructor
+parent render
+
+-- react batches the render phase of both the instances of UseClass Class --
+Firstchild constructor
+First child render
+Secondchild constructor
+Second child render
+--
+
+-- Now Dom manipulation happens --
+
+-- then componentdidmount() is called --
+FirstChild component did mount
+SecondChild component did mount
+Parent component did mount
+--
+*/
