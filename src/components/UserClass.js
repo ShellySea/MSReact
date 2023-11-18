@@ -3,44 +3,44 @@ import React from "react";
 class UserClass extends React.Component {
   constructor(props) {
     super(props);
-    // console.log(props);
     this.state = {
-      count: 0,
-      count2: 1,
+      userData: {
+        name: "Dummy",
+        following: 0,
+        avatar_url:
+          "https://cdn.pixabay.com/photo/2013/07/13/12/07/avatar-159236_640.png",
+      },
+      id: 0,
     };
-    console.log(this.props.name + "child constructor");
+    // console.log(this.props.name + "child constructor");
   }
 
-  componentDidMount() {
-    // place for doing API calls in class comp
+  async componentDidMount() {
     console.log(this.props.name + "Child component did mount");
+
+    const data = await fetch("https://api.github.com/users/shellysea");
+    const json = await data.json();
+    console.log(json);
+
+    this.setState({
+      userData: json,
+    });
+    console.log("componentDidMount");
+  }
+
+  componentDidUpdate() {
+    console.log("componentDidUpdate");
   }
 
   render() {
-    console.log(this.props.name + " child render");
-
-    const { name, location, contact, type } = this.props;
-    const { count, count2 } = this.state;
+    const { name, following, avatar_url, id } = this.state.userData;
 
     return (
       <div className="user-card">
+        <img style={{ height: "75px", width: "75px" }} src={avatar_url} />
         <h2>Name: {name}</h2>
-        <h3>Location: {location}</h3>
-        <h4>Contact: {contact}</h4>
-        <h4>Type: {type}</h4>
-        <h4>Count: {count}</h4>
-        <span>
-          <button
-            onClick={() => {
-              this.setState({
-                count: this.state.count + 1,
-              });
-            }}
-          >
-            Click
-          </button>
-        </span>
-        <h4>Count2: {this.state.count2}</h4>
+        <h3>Following: {following}</h3>
+        <h3>ID: {id}</h3>
       </div>
     );
   }
