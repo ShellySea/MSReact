@@ -9,3 +9,23 @@
 # When react finds the diff, when it tries to update the DOM, it says let me find out all the childrens batch the render phase because render phase is very fast whereas commit phase takes time. It batches the render phase, all the child components are rendered then the commit happens
 
 # React lifecycle method diag: https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
+# Parcel
+
+- Dev Build
+- HMR
+- Local Server
+- File watching algorithm
+- Caching - Faster builds
+- Image Optimization
+- Minification
+- Bundling
+- Compress
+- Consistent Hashing
+- Code Splitting
+- Differential Bundling
+- Diagnositic
+- Error Handling
+- Https
+- tree Shaking
+- Different dev and prod bundles

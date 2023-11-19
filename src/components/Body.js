@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 // Functional component
 const Body = () => {
@@ -50,6 +51,12 @@ const Body = () => {
       </div>
     );
   };
+
+  const onlineStatus = useOnlineStatus();
+
+  if (onlineStatus === false) {
+    return <h1>Offline! Please check your internet connection.</h1>;
+  }
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
@@ -114,7 +121,10 @@ const Body = () => {
           <h3>No Restaurants Found!!</h3>
         ) : (
           filteredRestaurants?.map((restaurant) => (
-            <Link to={"/restaurant/" + restaurant.info.id}>
+            <Link
+              to={"/restaurant/" + restaurant.info.id}
+              key={restaurant.info.id}
+            >
               <RestaurantCard resData={restaurant} key={restaurant.info.id} />
             </Link>
           ))
