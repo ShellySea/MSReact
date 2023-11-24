@@ -11,7 +11,10 @@ const RestaurantCard = (props) => {
     resData?.info;
   const { deliveryTime } = resData?.info.sla;
   return (
-    <div className="m-4 p-4 w-[250px] rounded-lg" style={styleCard}>
+    <div
+      className="m-4 p-4 w-[250px] rounded-lg bg-gray-100 hover:bg-gray-200"
+      // style={styleCard}
+    >
       <img
         className="rounded-lg"
         alt="res-logo"
@@ -26,6 +29,17 @@ const RestaurantCard = (props) => {
       <h4>{deliveryTime} mins</h4>
     </div>
   );
+};
+
+export const withPromotedLabel = (RestaurantCard) => {
+  return (props) => {
+    return (
+      <div>
+        <label>Promoted</label>
+        <RestaurantCard {...props} />
+      </div>
+    );
+  };
 };
 
 export default RestaurantCard;

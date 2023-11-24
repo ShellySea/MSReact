@@ -1,8 +1,9 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import useTheme from "../utils/useTheme";
 
 // Functional component
 const Body = () => {
@@ -11,9 +12,14 @@ const Body = () => {
   const [searchRestaurant, setSearchRestaurant] = useState("");
   const [sR, setSr] = useState("false");
 
-  // Whenever state variable update, react triggers a reconciliation cycle(re-renders the component)
-  console.log("Body Rendered");
+  const { currentTheme } = useTheme();
 
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
+
+  // Whenever state variable update, react triggers a reconciliation cycle(re-renders the component)
+  console.log("Body Rendered", filteredRestaurants);
+  console.log("currentTheme");
+  console.log(currentTheme);
   let showNoRes = false;
   const noRestaurants = "No Restaurants Found!";
 
@@ -21,6 +27,10 @@ const Body = () => {
     fetchData();
     console.log("use effect called...");
   }, []);
+
+  useEffect(() => {
+    console.log("theme triggered");
+  }, [currentTheme]);
 
   const fetchData = async () => {
     const data = await fetch(
@@ -34,8 +44,8 @@ const Body = () => {
         json.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
     );
-    console.log("---list of rest---");
-    console.log(listOfRestaurants);
+    // console.log("---list of rest---");
+    // console.log(listOfRestaurants);
     setFilteredRestaurants(
       json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants ||
@@ -54,6 +64,11 @@ const Body = () => {
 
   const onlineStatus = useOnlineStatus();
 
+  function checkMode() {
+    const theme = document.documentElement.className;
+    return theme;
+  }
+
   if (onlineStatus === false) {
     return <h1>Offline! Please check your internet connection.</h1>;
   }
@@ -61,7 +76,11 @@ const Body = () => {
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body">
+    <div
+      className={
+        document.documentElement.className === "dark" ? "dark" : "white"
+      }
+    >
       <div className="filter flex">
         <span className="search m-4 p-4">
           <input
@@ -129,7 +148,14 @@ const Body = () => {
               to={"/restaurant/" + restaurant.info.id}
               key={restaurant.info.id}
             >
-              <RestaurantCard resData={restaurant} key={restaurant.info.id} />
+              {restaurant.info.promoted ? (
+                <RestaurantCardPromoted
+                  resData={restaurant}
+                  key={restaurant.info.id}
+                />
+              ) : (
+                <RestaurantCard resData={restaurant} key={restaurant.info.id} />
+              )}
             </Link>
           ))
         )}
