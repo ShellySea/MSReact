@@ -3,16 +3,17 @@ import { ITEMS_URL } from "../utils/constants";
 import ItemList from "./ItemList";
 
 const RestaurantCategory = (props) => {
-  const [showItems, setShowItems] = useState(true);
   const { title, itemCards } = props.data;
 
-  const handleClick = () => {
-    // if (showItems) {
+  const handleClick = (e) => {
+    console.log(e.target);
+    props.setShowIndex();
+    console.log(props.showItems);
+    // if (props.showItems) {
     //   setShowItems(false);
     // } else {
     //   setShowItems(true);
     // }
-    setShowItems(!showItems);
   };
 
   return (
@@ -28,7 +29,7 @@ const RestaurantCategory = (props) => {
           <span>⬇️</span>
         </div>
 
-        {showItems && <ItemList items={itemCards} />}
+        {props.showItems && <ItemList items={itemCards} />}
       </div>
     </div>
   );
