@@ -1,6 +1,7 @@
 import Shimmer from "./Shimmer";
 import { useParams, useNavigate } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
@@ -21,23 +22,38 @@ const RestaurantMenu = () => {
       ?.card ||
     resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
 
-  console.log(resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards);
+  // console.log(
+  //   resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card
+  // );
+
+  const categories =
+    resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (c) =>
+        c.card?.["card"]?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
+
+  // console.log(categories);
+
   return (
-    <div className="menu">
-      <h3>Name: {name}</h3>
-      <p>
+    <div className="text-center my-4">
+      <h1 className="font-bold my-6 text-2xl">Name: {name}</h1>
+      <p className="font-bold text-lg">
         {cuisines.join(", ")}- {costForTwoMessage}
       </p>
-      <ul>
-        {itemCards?.map((menu) => (
-          <li key={menu?.card?.info?.id}>
-            {menu?.card?.info?.name} - Rs.{" "}
-            {menu?.card?.info?.price / 100 ||
-              menu?.card?.info?.defaultPrice / 100}
-          </li>
-        ))}
-      </ul>
-      <button onClick={() => navigate(-1)}>Go back</button>
+      {categories.map((category) => (
+        <RestaurantCategory
+          key={category.card.card.id}
+          data={category.card.card}
+        />
+      ))}
+      <br />
+      <button
+        className="border-solid border-2 border-indigo-600  bg-pink-100"
+        onClick={() => navigate(-1)}
+      >
+        Go back
+      </button>
     </div>
   );
 };

@@ -3,7 +3,6 @@ import Shimmer from "./Shimmer";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
-import useTheme from "../utils/useTheme";
 
 // Functional component
 const Body = () => {
@@ -12,14 +11,10 @@ const Body = () => {
   const [searchRestaurant, setSearchRestaurant] = useState("");
   const [sR, setSr] = useState("false");
 
-  const { currentTheme } = useTheme();
-
   const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
   // Whenever state variable update, react triggers a reconciliation cycle(re-renders the component)
   console.log("Body Rendered", filteredRestaurants);
-  console.log("currentTheme");
-  console.log(currentTheme);
   let showNoRes = false;
   const noRestaurants = "No Restaurants Found!";
 
@@ -27,10 +22,6 @@ const Body = () => {
     fetchData();
     console.log("use effect called...");
   }, []);
-
-  useEffect(() => {
-    console.log("theme triggered");
-  }, [currentTheme]);
 
   const fetchData = async () => {
     const data = await fetch(
