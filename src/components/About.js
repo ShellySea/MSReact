@@ -22,7 +22,9 @@ class About extends Component {
         {({ theme }) => (
           <div
             className={
-              theme === "dark" ? "bg-slate-900 text-zinc-100" : "bg-white"
+              theme === "dark"
+                ? "bg-slate-900 text-zinc-100 h-screen"
+                : "bg-white h-screen"
             }
           >
             <h3>This is About Component!</h3>
