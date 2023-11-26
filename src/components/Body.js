@@ -1,8 +1,9 @@
 import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import Shimmer from "./Shimmer";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 // Functional component
 const Body = () => {
@@ -11,16 +12,16 @@ const Body = () => {
   const [searchRestaurant, setSearchRestaurant] = useState("");
   const [sR, setSr] = useState("false");
 
+  const { theme } = useContext(ThemeContext);
+
   const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
   // Whenever state variable update, react triggers a reconciliation cycle(re-renders the component)
-  console.log("Body Rendered", filteredRestaurants);
   let showNoRes = false;
   const noRestaurants = "No Restaurants Found!";
 
   useEffect(() => {
     fetchData();
-    console.log("use effect called...");
   }, []);
 
   const fetchData = async () => {
@@ -28,7 +29,6 @@ const Body = () => {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    console.log(json.data?.cards);
     setListOfRestaurant(
       json.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants ||
@@ -69,7 +69,7 @@ const Body = () => {
   ) : (
     <div
       className={
-        document.documentElement.className === "dark" ? "dark" : "white"
+        theme === "light" ? "bg-slate-300, text-black" : "bg-slate-900"
       }
     >
       <div className="filter flex">
@@ -84,7 +84,11 @@ const Body = () => {
           />
           <span>
             <button
-              className="px-4 py-1 bg-green-100 m-4 rounded-lg"
+              className={
+                theme === "dark"
+                  ? "px-4 py-1 bg-slate-800 text-zinc-100 m-4 rounded-lg"
+                  : "px-4 py-1 bg-green-100 m-4 rounded-lg"
+              }
               style={{ marginLeft: "10px" }}
               onClick={() => {
                 const result = listOfRestaurants.filter((res) =>
@@ -109,7 +113,11 @@ const Body = () => {
         </span>
         <div className="search m-4 p-4">
           <button
-            className="px-4 py-1 bg-green-100 m-4 rounded-lg"
+            className={
+              theme === "dark"
+                ? "px-4 py-1 m-4 rounded-lg  bg-slate-800 text-zinc-100"
+                : "px-4 py-1 bg-green-100 m-4 rounded-lg"
+            }
             onClick={() => {
               const filteredList = listOfRestaurants?.filter(
                 (res) => res.info.avgRating > 4.3
@@ -120,7 +128,11 @@ const Body = () => {
             Top Rated Restaurants
           </button>
           <button
-            className="px-4 py-1 bg-green-100 m-4 rounded-lg"
+            className={
+              theme === "dark"
+                ? "px-4 py-1 m-4 rounded-lg bg-slate-800 text-zinc-100"
+                : "px-4 py-1 bg-green-100 m-4 rounded-lg"
+            }
             // disabled={listOfRestaurants.length === myData.length}
             onClick={() => {
               setFilteredRestaurants(listOfRestaurants);

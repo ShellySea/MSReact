@@ -13,6 +13,8 @@ const RestaurantMenu = () => {
 
   const [showIndex, setShowIndex] = useState(null);
 
+  const dum = "Dummy data";
+
   if (resInfo === null) {
     return <Shimmer />;
   }
@@ -48,10 +50,11 @@ const RestaurantMenu = () => {
       </p>
       {categories.map((category, index) => (
         <RestaurantCategory
-          key={category.card.card.id}
+          key={category.card.card.title}
           data={category.card.card}
           showItems={index === showIndex ? true : false}
           setShowIndex={() => setShowIndexProps(index)}
+          dummy={dum}
         />
       ))}
       <br />

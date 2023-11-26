@@ -1,7 +1,13 @@
+import { useContext } from "react";
+import { ThemeContext } from "../contexts/ThemeContext.js";
+
 const Grocery = () => {
+  const { theme } = useContext(ThemeContext);
   return (
-    <div>
-      <h2>This is a lazily loaded Grocery page!</h2>
+    <div className={theme === "dark" ? "bg-slate-800" : "bg-white"}>
+      <h2 className={theme === "dark" ? " text-zinc-100" : "text-black"}>
+        This is a lazily loaded Grocery page!
+      </h2>
     </div>
   );
 };

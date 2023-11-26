@@ -4,6 +4,7 @@ const ItemList = (props) => {
   //   console.log("item cards");
   //   console.log(props);
   const items = props.items;
+  console.log(props.dummy);
   return (
     <div>
       {items.map(
