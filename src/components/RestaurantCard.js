@@ -9,7 +9,6 @@ const RestaurantCard = (props) => {
   const { deliveryTime } = resData?.info.sla;
   const { theme } = useContext(ThemeContext);
 
-  // m-4 p-4 w-[250px] rounded-lg bg-gray-100 hover:bg-gray-200"
   return (
     <div
       className={

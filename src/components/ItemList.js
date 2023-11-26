@@ -1,17 +1,23 @@
+import { useContext } from "react";
 import { ITEMS_URL } from "../utils/constants";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const ItemList = (props) => {
-  //   console.log("item cards");
-  //   console.log(props);
   const items = props.items;
   console.log(props.dummy);
+
+  const { theme } = useContext(ThemeContext);
   return (
     <div>
       {items.map(
         (i) => (
           <div
             key={i.card.info.id}
-            className="p-2 m-2 border-gray-200 border-b-2 flex justify-between text-left"
+            className={
+              theme === "dark"
+                ? "p-2 m-2 border-gray-200 border-b-2 flex justify-between text-left"
+                : "p-2 m-2 border-gray-200 border-b-2 flex justify-between text-left"
+            }
           >
             <div className="w-9/12">
               <div className="py-2">
@@ -26,7 +32,13 @@ const ItemList = (props) => {
                 alt="res-logo"
                 src={ITEMS_URL + i.card.info.imageId}
               />
-              <button className="border border-black rounded-b-lg text-green-800 w-full items-center shadow-lg">
+              <button
+                className={
+                  theme === "dark"
+                    ? "border border-black rounded-b-lg bg-slate-800 text-zinc-100 w-full items-center shadow-lg"
+                    : "border border-black rounded-b-lg text-green-800 w-full items-center shadow-lg"
+                }
+              >
                 Add
               </button>
             </div>

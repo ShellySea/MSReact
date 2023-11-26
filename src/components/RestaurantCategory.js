@@ -1,24 +1,25 @@
-import { useState } from "react";
-import { ITEMS_URL } from "../utils/constants";
+import { useContext } from "react";
 import ItemList from "./ItemList";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 const RestaurantCategory = (props) => {
   const { title, itemCards } = props.data;
 
+  const { theme } = useContext(ThemeContext);
+
   const handleClick = (e) => {
-    console.log(e.target);
     props.setShowIndex();
-    console.log(props.showItems);
-    // if (props.showItems) {
-    //   setShowItems(false);
-    // } else {
-    //   setShowItems(true);
-    // }
   };
 
   return (
     <div>
-      <div className="w-6/12 mx-auto my-4 bg-gray-50 shadow-lg p-4">
+      <div
+        className={
+          theme === "dark"
+            ? "w-6/12 mx-auto my-4 bg-slate-800 text-zinc-100 shadow-lg p-4"
+            : "w-6/12 mx-auto my-4 bg-gray-50 shadow-lg p-4"
+        }
+      >
         <div
           className="flex justify-between cursor-pointer"
           onClick={handleClick}
