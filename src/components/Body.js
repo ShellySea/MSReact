@@ -87,7 +87,7 @@ const Body = () => {
               className={
                 theme === "dark"
                   ? "px-4 py-1 bg-slate-800 text-zinc-100 m-4 rounded-lg"
-                  : "px-4 py-1 bg-green-100 m-4 rounded-lg"
+                  : "px-4 py-1 border border-black bg-gray-300 m-4 rounded-lg hover:bg-gray-400"
               }
               style={{ marginLeft: "10px" }}
               onClick={() => {
@@ -116,7 +116,7 @@ const Body = () => {
             className={
               theme === "dark"
                 ? "px-4 py-1 m-4 rounded-lg  bg-slate-800 text-zinc-100"
-                : "px-4 py-1 bg-green-100 m-4 rounded-lg"
+                : "px-4 py-1 border border-black bg-gray-300 m-4 rounded-lg hover:bg-gray-400"
             }
             onClick={() => {
               const filteredList = listOfRestaurants?.filter(
@@ -131,7 +131,7 @@ const Body = () => {
             className={
               theme === "dark"
                 ? "px-4 py-1 m-4 rounded-lg bg-slate-800 text-zinc-100"
-                : "px-4 py-1 bg-green-100 m-4 rounded-lg"
+                : "px-4 py-1 border border-black shadow-2xl bg-gray-300 m-4 rounded-lg hover:bg-gray-400"
             }
             // disabled={listOfRestaurants.length === myData.length}
             onClick={() => {

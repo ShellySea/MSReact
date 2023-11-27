@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../contexts/UserContext";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { useSelector } from "react-redux";
 
 const Header = (props) => {
   const [btnName, setBtnName] = useState("Login");
@@ -14,6 +15,10 @@ const Header = (props) => {
   const { theme } = useContext(ThemeContext);
   const onlineStatus = useOnlineStatus();
 
+  const cartItems = useSelector((store) => store.cart.items);
+
+  console.log(cartItems);
+
   const onChangeBtn = (e) => {
     if (e.target.checked) {
       props.settingTheme("dark");
@@ -21,7 +26,6 @@ const Header = (props) => {
       props.settingTheme("light");
     }
   };
-  // flex justify-between bg-pink-100 shadow-lg sm:bg-amber-200 lg:bg-lime-100
   return (
     <div
       className={
@@ -71,7 +75,7 @@ const Header = (props) => {
             <Link to="/grocery">Grocery</Link>
           </li>
           <li className="px-4">
-            <Link to="/cart">Cart</Link>
+            <Link to="/cart">Cart ({cartItems.length})</Link>
           </li>
           <li className="px-4 font-bold">{loggedInUser}</li>
         </ul>

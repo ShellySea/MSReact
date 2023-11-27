@@ -13,7 +13,7 @@ const RestaurantCard = (props) => {
     <div
       className={
         theme === "dark"
-          ? "bg-slate-800 m-4 p-4 w-[250px] rounded-lg bg-gray-100 text-slate-50 hover:bg-slate-400"
+          ? "bg-slate-800 m-4 p-4 w-[250px] rounded-lg bg-gray-100 text-slate-50 hover:bg-slate-400 hover:text-black"
           : " m-4 p-4 w-[250px] rounded-lg bg-gray-100 hover:bg-gray-200"
       }
     >
@@ -22,7 +22,9 @@ const RestaurantCard = (props) => {
         alt="res-logo"
         src={CDN_URL + cloudinaryImageId}
       />
-      <h3 style={{ color: "green" }} className="font-bold">
+      <h3
+        className={theme === "dark" ? "font-bold " : "font-bold text-lime-700"}
+      >
         {name}
       </h3>
       <h4>{cuisines.join(", ")}</h4>

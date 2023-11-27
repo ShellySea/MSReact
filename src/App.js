@@ -11,6 +11,8 @@ import RestaurantMenu from "./components/RestaurantMenu.js";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import UserContext from "./contexts/UserContext.js";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore.js";
 
 const AppLayout = () => {
   const [theme, setTheme] = useState("light");
@@ -31,15 +33,17 @@ const AppLayout = () => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ loggedInUser: userName }}>
-      <ThemeProvider value={{ theme, darkTheme, lightTheme }}>
-        <div>
-          <Header theme={theme} settingTheme={(theme) => setTheme(theme)} />
-          <Outlet />
-          <Footer />
-        </div>
-      </ThemeProvider>
-    </UserContext.Provider>
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ loggedInUser: userName }}>
+        <ThemeProvider value={{ theme, darkTheme, lightTheme }}>
+          <div>
+            <Header theme={theme} settingTheme={(theme) => setTheme(theme)} />
+            <Outlet />
+            <Footer />
+          </div>
+        </ThemeProvider>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
