@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 const ItemList = (props) => {
   const items = props.items;
   console.log(props.dummy);
+  let sum = 0;
 
   const dispatch = useDispatch();
 
@@ -25,14 +26,14 @@ const ItemList = (props) => {
 
   const { theme } = useContext(ThemeContext);
   return (
-    <div>
-      {items.map(
-        (i) => (
+    <div className="flex">
+      <div>
+        {items.map((i) => (
           <div
             key={i.card.info.id}
             className={
               theme === "dark"
-                ? "p-2 m-2 border-gray-200 border-b-2 flex justify-between text-left"
+                ? "p-2 m-2 border-gray-200 border-b-2 flex justify-between text-left flex"
                 : "p-2 m-2 border-gray-200 border-b-2 flex justify-between text-left"
             }
           >
@@ -74,8 +75,19 @@ const ItemList = (props) => {
               )}
             </div>
           </div>
-        )
-        // console.log(i.card.info)
+        ))}
+      </div>
+      {location.pathname === "/cart" && (
+        <div
+          className={
+            theme === "dark" ? "w-4/12 text-zinc-200" : "w-4/12 text-black"
+          }
+        >
+          {items.map((item) => {
+            sum = sum + item.card.info.price / 100;
+          })}
+          Total: {sum}
+        </div>
       )}
     </div>
   );
